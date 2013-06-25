@@ -51,6 +51,11 @@ class Request implements TransferInterface
     private $_transactionId;
 
     /**
+    * @var string
+    */
+    private $_authCode;
+
+    /**
      * @var string
      */
     private $_rawData;
@@ -241,9 +246,29 @@ class Request implements TransferInterface
     }
 
     /**
-     * returns request as raw data.
+     * returns authentication code.
      * @return string
      */
+    public function getAuthCode()
+    {
+        return $this->_authCode;
+    }
+
+    /**
+     * sets authentication code to request object.
+     * @return string
+     * @return self
+     */
+    public function setAuthCode($authCode)
+    {
+        $this->_authCode = $authCode;
+        return $this;
+    }
+
+    /**
+    * returns request as raw data.
+    * @return string
+    */
     public function getRawData()
     {
         return $this->_rawData;
