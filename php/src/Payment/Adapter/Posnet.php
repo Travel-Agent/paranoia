@@ -15,7 +15,22 @@ use \Communication\Connector;
 class Posnet extends AdapterAbstract implements AdapterInterface
 {
     const CONNECTOR_TYPE =  Connector::CONNECTOR_TYPE_HTTP;
+    /**
+     *
+     * @var array
+     */
+    protected $_transactionMap = array(
+                                    self::TRANSACTION_TYPE_PREAUTHORIZATION => 'auth',
+                                    self::TRANSACTION_TYPE_POSTAUTHORIZATION => 'capt',
+                                    self::TRANSACTION_TYPE_SALE => 'sale',
+                                    self::TRANSACTION_TYPE_CANCEL => 'reverse',
+                                    self::TRANSACTION_TYPE_REFUND => 'return');
 
+    /**
+     * builds request base with common arguments.
+     *
+     * @return array
+     */
     private function buildBaseRequest()
     {
         $config = $this->_config;
@@ -169,7 +184,7 @@ class Posnet extends AdapterAbstract implements AdapterInterface
             $response->setResponseMessage('Success');
             /**
              *
-             * @todo posnet servisi response içinde order id'yi döndürmüyor. Bu datayý request'ten almamýz gerekiyor.
+             * @todo posnet servisi response iÃ§inde order id'yi dÃ¶ndÃ¼rmÃ¼yor. Bu datayÄ± request'ten almamÄ±z gerekiyor.
              */
             if (property_exists($xml, 'orderId')){
                 $response->setOrderId((string)$xml->orderId);
