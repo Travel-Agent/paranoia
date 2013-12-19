@@ -56,6 +56,11 @@ class Request implements TransferInterface
     private $_authCode;
 
     /**
+    * @var string
+    */
+    private $_authCode;
+
+    /**
      * @var string
      */
     private $_rawData;
